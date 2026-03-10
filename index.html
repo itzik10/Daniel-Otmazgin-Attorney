@@ -3,127 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>דניאל אוטמזגין - משרד עורכי דין כפר סבא</title>
+    <title>עו"ד דניאל אוטמזגין - משרד עורכי דין ונוטריון</title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --dark-blue: #101e36;
-            --gold-accent: #b89551;
-            --soft-white: #f8f9fa;
+            --gold: #b89551;
+            --light-bg: #f8f9fa;
         }
 
         body {
             font-family: 'Assistant', sans-serif;
-            margin: 0; padding: 0; background-color: #fff; color: #333; line-height: 1.6;
+            margin: 0; padding: 0;
+            background-color: #fff;
+            color: #333;
+            line-height: 1.6;
         }
 
         header {
             background-color: var(--dark-blue);
-            color: white; padding: 80px 20px; text-align: center;
-            border-bottom: 5px solid var(--gold-accent);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--gold);
         }
 
-        header h1 { margin: 0; font-size: 3rem; font-weight: 700; letter-spacing: 1px; }
-        header p { margin: 10px 0 0; font-size: 1.3rem; font-weight: 300; opacity: 0.9; }
+        header h1 { margin: 0; font-size: 3rem; font-weight: 700; }
+        header p { margin: 10px 0 0; font-size: 1.3rem; font-weight: 300; }
 
-        .container { max-width: 800px; margin: -60px auto 40px; padding: 0 20px; }
+        .container { max-width: 850px; margin: -60px auto 50px; padding: 0 20px; }
 
-        /* עיצוב התמונה של דניאל */
-        .profile-img-container {
-            text-align: center; margin-bottom: -50px; position: relative; z-index: 2;
+        /* כרטיס פרופיל */
+        .profile-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
         }
+
         .profile-img {
-            width: 150px; height: 150px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
-            border: 4px solid var(--gold-accent);
-            object-fit: cover; /* זה מסיר את השוליים השחורים ומתמקד בפנים */
+            border: 5px solid var(--gold);
+            object-fit: cover; /* חותך שוליים שחורים ומתמקד במרכז */
+            margin-top: -120px;
             background-color: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
+        .bio {
+            margin: 25px 0;
+            font-size: 1.15rem;
+            color: var(--dark-blue);
+        }
+
+        .social-links { margin-top: 20px; }
+        .social-links a {
+            font-size: 28px;
+            margin: 0 12px;
+            color: var(--dark-blue);
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .social-links a:hover { color: var(--gold); transform: scale(1.1); }
+
+        /* עיצוב הטופס */
         .form-card {
-            background: white; padding: 70px 40px 40px; /* פדינג עליון גדול בגלל התמונה */
-            border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            position: relative; z-index: 1;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--gold);
         }
 
-        .form-card h2 { text-align: center; color: var(--dark-blue); margin-bottom: 30px; }
+        .form-card h2 {
+            text-align: center;
+            color: var(--dark-blue);
+            margin-bottom: 30px;
+        }
 
         .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 5px; font-weight: 700; color: var(--dark-blue); }
-        input, textarea {
-            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px;
-            font-size: 16px; box-sizing: border-box; font-family: inherit;
-        }
+        label { display: block; margin-bottom: 8px; font-weight: 700; color: var(--dark-blue); }
         
-        input:focus { border-color: var(--gold-accent); outline: none; }
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 16px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
 
         button {
-            width: 100%; background-color: var(--dark-blue); color: white;
-            padding: 18px; border: none; border-radius: 4px;
-            font-size: 1.2rem; font-weight: 700; cursor: pointer;
+            width: 100%;
+            background-color: var(--dark-blue);
+            color: white;
+            padding: 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
             transition: 0.3s;
+            margin-top: 10px;
         }
 
-        button:hover { background-color: var(--gold-accent); transform: translateY(-2px); }
+        button:hover { background-color: var(--gold); }
 
-        .features { display: flex; justify-content: space-around; margin-top: 50px; gap: 20px; text-align: center; }
-        .feature-item h3 { color: var(--gold-accent); border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .footer {
+            text-align: center;
+            padding: 40px;
+            background-color: var(--light-bg);
+            color: #666;
+            margin-top: 50px;
+        }
 
-        .footer { text-align: center; padding: 40px; background: var(--soft-white); margin-top: 50px; color: #666; }
+        @media (max-width: 600px) {
+            header h1 { font-size: 2.2rem; }
+            .profile-card { padding: 20px; }
+        }
     </style>
 </head>
 <body>
 
 <header>
     <h1>דניאל אוטמזגין</h1>
-    <p>עורך דין ונוטריון בכפר סבא</p>
+    <p>משרד עורכי דין ונוטריון</p>
 </header>
 
 <div class="container">
-    <div class="profile-img-container">
-        <img src="Daniel.jpg" alt="עו ד דניאל אוטמזגין" class="profile-img">
+    <div class="profile-card">
+        <img src="Daniel.jpg" alt="עו"ד דניאל אוטמזגין" class="profile-img">
+        <div class="bio">
+            <strong>עו"ד דניאל אוטמזגין</strong>, בעל שלושה תארים במשפטים, ממשל ומדיניות ציבורית.<br>
+            כיהן בשורת תפקידים בכירים במגזר הציבורי ובעל ניסיון מוניציפאלי רב. 
+            מתמחה בדין האזרחי והפלילי ובעל הסמכה מיוחדת מטעם משרד המשפטים והאפוטרופוס הכללי לעריכת ייפוי כוח מתמשך.
+        </div>
+        <div class="social-links">
+            <a href="https://wa.me/message/UWW26AIWIPANB1" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/share/175QVheqhB/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/danielotmazgin" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://t.me/otmazginews" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+        </div>
     </div>
 
     <div class="form-card">
-        <h2>צרו קשר לייעוץ ראשוני</h2>
-        
-        <form action="https://script.google.com/macros/s/AKfycbyFLcs5FOFZPQhYWBECws5JXD4GqkFDXrzP90ER3XGmLk7PDvMjXCTxj_xX8ckIQv1X/exec" method="POST">
+        <h2>פנייה למשרד</h2>
+        <form id="lawyerForm" action="https://script.google.com/macros/s/AKfycbyj9CJ9HVbJ85zmCOuQv1pTi3iAfgqhkhTHkiNYhr9VglCAEOk2Y7s9z3-abCwaxsgM/exec" method="POST">
+            
             <div class="form-group">
-                <label>שם מלא</label>
+                <label>סוג השירות המבוקש</label>
+                <select name="service_type" id="serviceSelect" onchange="updateFormLabels()">
+                    <option value="ייעוץ כללי או משפטי">ייעוץ כללי או משפטי</option>
+                    <option value="ייפוי כוח מתמשך">ייפוי כוח מתמשך</option>
+                    <option value="צוואה">צוואה</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label id="nameLabel">שם מלא (כפי שמופיע בת"ז)</label>
                 <input type="text" name="name" required>
             </div>
+
             <div class="form-group">
-                <label>טלפון</label>
+                <label>מספר תעודת זהות</label>
+                <input type="text" name="id_number" required>
+            </div>
+
+            <div class="form-group">
+                <label>כתובת</label>
+                <input type="text" name="address">
+            </div>
+
+            <div class="form-group">
+                <label>טלפון נייד</label>
                 <input type="tel" name="phone" required>
             </div>
-            <div class="form-group">
-                <label>תעודת זהות</label>
-                <input type="text" name="id_number">
-            </div>
-            <div class="form-group">
-                <label>הודעה</label>
-                <textarea name="message" rows="3"></textarea>
-            </div>
-            <button type="submit">שליחת פרטים</button>
-        </form>
-    </div>
 
-    <div class="features">
-        <div class="feature-item">
-            <h3>מקצועיות</h3>
-            <p>ניסיון רב בערכאות המשפטיות השונות.</p>
-        </div>
-        <div class="feature-item">
-            <h3>זמינות</h3>
-            <p>מענה אישי ומהיר לכל לקוח בכפר סבא והסביבה.</p>
-        </div>
+            <div class="form-group">
+                <label>דוא"ל</label>
+                <input type="email" name="email">
+            </div>
+
+            <div id="additionalFields" class="form-group" style="display:none;">
+                <label id="additionalLabel">פרטי מיופי כוח / יורשים</label>
+                <textarea name="additional_details" rows="3" placeholder="שם מלא ומספר תעודת זהות..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label id="caseLabel">פרטי המקרה</label>
+                <textarea name="case_details" rows="4"></textarea>
+            </div>
+
+            <button type="submit" id="submitBtn">שלח הודעה מאובטחת</button>
+        </form>
     </div>
 </div>
 
 <div class="footer">
-    © 2026 משרד עורכי דין דניאל אוטמזגין | רחוב ויצמן, כפר סבא
+    עו"ד דניאל אוטמזגין | כפר סבא | כל הזכויות שמורות © 2026
 </div>
+
+<script>
+    function updateFormLabels() {
+        var service = document.getElementById("serviceSelect").value;
+        var additionalFields = document.getElementById("additionalFields");
+        var additionalLabel = document.getElementById("additionalLabel");
+        var caseLabel = document.getElementById("caseLabel");
+        var nameLabel = document.getElementById("nameLabel");
+
+        // איפוס והתאמה לפי סוג שירות
+        if (service === "ייפוי כוח מתמשך") {
+            additionalFields.style.display = "block";
+            additionalLabel.innerText = "פרטי מיופי כוח (שם מלא ותעודת זהות)";
+            nameLabel.innerText = "פרטי הממנה (שם מלא כפי שכתוב בת\"ז)";
+            caseLabel.innerText = "הערות נוספות";
+        } else if (service === "צוואה") {
+            additionalFields.style.display = "block";
+            additionalLabel.innerText = "פרטי היורשים (שם מלא ותעודת זהות - עד 3 יורשים)";
+            nameLabel.innerText = "פרטי המצווה (שם מלא כפי שכתוב בת\"ז)";
+            caseLabel.innerText = "הערות נוספות";
+        } else {
+            additionalFields.style.display = "none";
+            nameLabel.innerText = "שם מלא (כפי שמופיע בת\"ז)";
+            caseLabel.innerText = "פרטי המקרה";
+        }
+    }
+
+    document.getElementById('lawyerForm').onsubmit = function() {
+        document.getElementById('submitBtn').disabled = true;
+        document.getElementById('submitBtn').innerText = "שולח נתונים...";
+    };
+</script>
 
 </body>
 </html>

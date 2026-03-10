@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>עו"ד דניאל אוטמזגין - משרד עורכי דין </title>
+    <title>עו"ד דניאל אוטמזגין - משרד עורכי דין</title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -21,21 +21,25 @@
             line-height: 1.6;
         }
 
-        /* הדר חדש - מפריד בין השם לתמונה */
+        /* הדר עם הלוגו החדש */
         header {
             background-color: var(--dark-blue);
             color: white;
-            padding: 40px 20px;
+            padding: 30px 20px;
             text-align: center;
             border-bottom: 5px solid var(--gold);
         }
 
-        header h1 { margin: 0; font-size: 3rem; font-weight: 700; }
-        header p { margin: 10px 0 0; font-size: 1.3rem; font-weight: 300; }
+        .main-logo {
+            max-width: 450px;
+            width: 100%;
+            height: auto;
+            /* פילטר קטן כדי שהלוגו ישתלב יפה על הרקע הכחול אם הוא עם רקע לבן */
+            border-radius: 4px;
+        }
 
         .container { max-width: 850px; margin: 30px auto 50px; padding: 0 20px; }
 
-        /* כרטיס פרופיל מעודכן - ללא מיקום אבסולוטי */
         .profile-card {
             background: white;
             border-radius: 8px;
@@ -48,14 +52,12 @@
             align-items: center;
         }
 
-        /* התמונה עכשיו נדחפת למטה ולא מסתירה */
         .profile-img {
             width: 160px;
             height: 160px;
             border-radius: 50%;
             border: 5px solid var(--gold);
             object-fit: cover;
-            /* הסרתי את ה-margin השלילי */
             margin-bottom: 20px; 
             background-color: white;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -68,7 +70,6 @@
             max-width: 700px;
         }
 
-        .social-links { margin-top: 20px; }
         .social-links a {
             font-size: 28px;
             margin: 0 12px;
@@ -78,7 +79,6 @@
         }
         .social-links a:hover { color: var(--gold); transform: scale(1.1); }
 
-        /* עיצוב הטופס */
         .form-card {
             background: white;
             padding: 40px;
@@ -87,69 +87,37 @@
             border-top: 4px solid var(--gold);
         }
 
-        .form-card h2 {
-            text-align: center;
-            color: var(--dark-blue);
-            margin-bottom: 30px;
-        }
+        .form-card h2 { text-align: center; color: var(--dark-blue); margin-bottom: 30px; }
 
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-weight: 700; color: var(--dark-blue); }
         
         input, select, textarea {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-            font-family: inherit;
-            font-size: 16px;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--gold);
+            width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 4px;
+            box-sizing: border-box; font-family: inherit; font-size: 16px;
         }
 
         button {
-            width: 100%;
-            background-color: var(--dark-blue);
-            color: white;
-            padding: 20px;
-            border: none;
-            border-radius: 4px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 10px;
+            width: 100%; background-color: var(--dark-blue); color: white;
+            padding: 20px; border: none; border-radius: 4px;
+            font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: 0.3s;
         }
 
         button:hover { background-color: var(--gold); }
 
-        .footer {
-            text-align: center;
-            padding: 40px;
-            background-color: var(--light-bg);
-            color: #666;
-            margin-top: 50px;
-        }
+        .footer { text-align: center; padding: 40px; background-color: var(--light-bg); color: #666; margin-top: 50px; }
 
         @media (max-width: 600px) {
-            header { padding: 30px 10px; }
-            header h1 { font-size: 2rem; }
-            header p { font-size: 1.1rem; }
+            .main-logo { max-width: 280px; }
             .profile-card { padding: 20px; }
-            .profile-img { width: 120px; height: 120px; }
-            .bio { font-size: 1rem; }
+            .profile-img { width: 130px; height: 130px; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>דניאל אוטמזגין</h1>
-    <p>משרד עורכי דין ונוטריון</p>
+    <img src="logo.jpeg" alt="דניאל אוטמזגין משרד עורכי דין" class="main-logo">
 </header>
 
 <div class="container">
@@ -161,10 +129,10 @@
             מתמחה בדין האזרחי והפלילי ובעל הסמכה מיוחדת מטעם משרד המשפטים והאפוטרופוס הכללי לעריכת ייפוי כוח מתמשך.
         </div>
         <div class="social-links">
-            <a href="https://wa.me/message/UWW26AIWIPANB1" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.facebook.com/share/175QVheqhB/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com/danielotmazgin" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://t.me/otmazginews" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+            <a href="https://wa.me/message/UWW26AIWIPANB1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/share/175QVheqhB/" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/danielotmazgin" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://t.me/otmazginews" target="_blank"><i class="fab fa-telegram"></i></a>
         </div>
     </div>
 
@@ -174,7 +142,7 @@
             
             <div class="form-group">
                 <label>סוג השירות המבוקש</label>
-                <select name="service_type" id="serviceSelect" onchange="updateFormLabels()">
+                <select name="service_type" id="serviceSelect" onchange="updateLabels()">
                     <option value="ייעוץ כללי או משפטי">ייעוץ כללי או משפטי</option>
                     <option value="ייפוי כוח מתמשך">ייפוי כוח מתמשך</option>
                     <option value="צוואה">צוואה</option>
@@ -206,8 +174,8 @@
                 <input type="email" name="email">
             </div>
 
-            <div id="additionalFields" class="form-group" style="display:none;">
-                <label id="additionalLabel">פרטי מיופי כוח / יורשים</label>
+            <div id="addFields" class="form-group" style="display:none;">
+                <label id="addLabel">פרטי מיופי כוח / יורשים</label>
                 <textarea name="additional_details" rows="3" placeholder="שם מלא ומספר תעודת זהות..."></textarea>
             </div>
 
@@ -226,25 +194,25 @@
 </div>
 
 <script>
-    function updateFormLabels() {
+    function updateLabels() {
         var service = document.getElementById("serviceSelect").value;
-        var additionalFields = document.getElementById("additionalFields");
-        var additionalLabel = document.getElementById("additionalLabel");
+        var addFields = document.getElementById("addFields");
+        var addLabel = document.getElementById("addLabel");
         var caseLabel = document.getElementById("caseLabel");
         var nameLabel = document.getElementById("nameLabel");
 
         if (service === "ייפוי כוח מתמשך") {
-            additionalFields.style.display = "block";
-            additionalLabel.innerText = "פרטי מיופי כוח (שם מלא ותעודת זהות)";
+            addFields.style.display = "block";
+            addLabel.innerText = "פרטי מיופי כוח (שם מלא ותעודת זהות)";
             nameLabel.innerText = "פרטי הממנה (שם מלא כפי שכתוב בת\"ז)";
             caseLabel.innerText = "הערות נוספות";
         } else if (service === "צוואה") {
-            additionalFields.style.display = "block";
-            additionalLabel.innerText = "פרטי היורשים (שם מלא ותעודת זהות - עד 3 יורשים)";
+            addFields.style.display = "block";
+            addLabel.innerText = "פרטי היורשים (שם מלא ותעודת זהות)";
             nameLabel.innerText = "פרטי המצווה (שם מלא כפי שכתוב בת\"ז)";
             caseLabel.innerText = "הערות נוספות";
         } else {
-            additionalFields.style.display = "none";
+            addFields.style.display = "none";
             nameLabel.innerText = "שם מלא (כפי שמופיע בת\"ז)";
             caseLabel.innerText = "פרטי המקרה";
         }

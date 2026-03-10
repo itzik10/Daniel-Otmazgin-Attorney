@@ -7,111 +7,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --dark-blue: #101e36;
-            --gold: #b89551;
-            --light-bg: #f8f9fa;
-        }
-
-        body {
-            font-family: 'Assistant', sans-serif;
-            margin: 0; padding: 0;
-            background-color: #fff;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* הדר עם הלוגו החדש */
-        header {
-            background-color: var(--dark-blue);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            border-bottom: 5px solid var(--gold);
-        }
-
-        .main-logo {
-            max-width: 450px;
-            width: 100%;
-            height: auto;
-            /* פילטר קטן כדי שהלוגו ישתלב יפה על הרקע הכחול אם הוא עם רקע לבן */
-            border-radius: 4px;
-        }
-
+        :root { --dark-blue: #101e36; --gold: #b89551; --light-bg: #f8f9fa; }
+        body { font-family: 'Assistant', sans-serif; margin: 0; padding: 0; background-color: #fff; color: #333; line-height: 1.6; }
+        header { background-color: var(--dark-blue); color: white; padding: 30px 20px; text-align: center; border-bottom: 5px solid var(--gold); }
+        .main-logo { max-width: 450px; width: 100%; height: auto; }
         .container { max-width: 850px; margin: 30px auto 50px; padding: 0 20px; }
-
-        .profile-card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            padding: 40px;
-            text-align: center;
-            margin-bottom: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .profile-img {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            border: 5px solid var(--gold);
-            object-fit: cover;
-            margin-bottom: 20px; 
-            background-color: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .bio {
-            margin: 10px 0 25px;
-            font-size: 1.15rem;
-            color: var(--dark-blue);
-            max-width: 700px;
-        }
-
-        .social-links a {
-            font-size: 28px;
-            margin: 0 12px;
-            color: var(--dark-blue);
-            transition: 0.3s;
-            text-decoration: none;
-        }
+        
+        .profile-card { background: white; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); padding: 40px; text-align: center; margin-bottom: 30px; display: flex; flex-direction: column; align-items: center; }
+        .profile-img { width: 160px; height: 160px; border-radius: 50%; border: 5px solid var(--gold); object-fit: cover; margin-bottom: 20px; background-color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .bio { margin: 10px 0 25px; font-size: 1.15rem; color: var(--dark-blue); max-width: 700px; }
+        .social-links a { font-size: 28px; margin: 0 12px; color: var(--dark-blue); transition: 0.3s; text-decoration: none; }
         .social-links a:hover { color: var(--gold); transform: scale(1.1); }
 
-        .form-card {
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-top: 4px solid var(--gold);
-        }
-
+        .form-card { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 4px solid var(--gold); min-height: 400px; }
         .form-card h2 { text-align: center; color: var(--dark-blue); margin-bottom: 30px; }
-
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-weight: 700; color: var(--dark-blue); }
-        
-        input, select, textarea {
-            width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 4px;
-            box-sizing: border-box; font-family: inherit; font-size: 16px;
-        }
-
-        button {
-            width: 100%; background-color: var(--dark-blue); color: white;
-            padding: 20px; border: none; border-radius: 4px;
-            font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: 0.3s;
-        }
-
+        input, select, textarea { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-family: inherit; font-size: 16px; }
+        button { width: 100%; background-color: var(--dark-blue); color: white; padding: 20px; border: none; border-radius: 4px; font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: 0.3s; }
         button:hover { background-color: var(--gold); }
 
+        /* הודעת הצלחה */
+        #success-message { display: none; text-align: center; padding: 40px 10px; animation: fadeIn 0.5s ease-in; }
+        #success-message i { font-size: 60px; color: var(--gold); margin-bottom: 20px; }
+        #success-message h3 { color: var(--dark-blue); font-size: 2rem; margin-bottom: 15px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .footer { text-align: center; padding: 40px; background-color: var(--light-bg); color: #666; margin-top: 50px; }
-
-        @media (max-width: 600px) {
-            .main-logo { max-width: 280px; }
-            .profile-card { padding: 20px; }
-            .profile-img { width: 130px; height: 130px; }
-        }
     </style>
 </head>
 <body>
@@ -137,93 +58,102 @@
     </div>
 
     <div class="form-card">
-        <h2>פנייה למשרד</h2>
-        <form id="lawyerForm" action="https://script.google.com/macros/s/AKfycbyj9CJ9HVbJ85zmCOuQv1pTi3iAfgqhkhTHkiNYhr9VglCAEOk2Y7s9z3-abCwaxsgM/exec" method="POST">
-            
-            <div class="form-group">
-                <label>סוג השירות המבוקש</label>
-                <select name="service_type" id="serviceSelect" onchange="updateLabels()">
-                    <option value="ייעוץ כללי או משפטי">ייעוץ כללי או משפטי</option>
-                    <option value="ייפוי כוח מתמשך">ייפוי כוח מתמשך</option>
-                    <option value="צוואה">צוואה</option>
-                </select>
-            </div>
+        <div id="form-container">
+            <h2>פנייה למשרד</h2>
+            <form id="lawyerForm" action="https://script.google.com/macros/s/AKfycbyj9CJ9HVbJ85zmCOuQv1pTi3iAfgqhkhTHkiNYhr9VglCAEOk2Y7s9z3-abCwaxsgM/exec" method="POST" target="v_frame">
+                
+                <div class="form-group">
+                    <label>סוג השירות המבוקש</label>
+                    <select name="service_type" id="serviceSelect" onchange="updateLabels()">
+                        <option value="ייעוץ כללי או משפטי">ייעוץ כללי או משפטי</option>
+                        <option value="ייפוי כוח מתמשך">ייפוי כוח מתמשך</option>
+                        <option value="צוואה">צוואה</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label id="nameLabel">שם </label>
-                <input type="text" name="name" required>
-            </div>
+                <div class="form-group">
+                    <label id="nameLabel">שם מלא</label>
+                    <input type="text" name="name" required>
+                </div>
 
-            <div class="form-group">
-                <label>מספר תעודת זהות</label>
-                <input type="text" name="id_number" required>
-            </div>
+                <div class="form-group">
+                    <label>מספר תעודת זהות</label>
+                    <input type="text" name="id_number" required>
+                </div>
 
-            <div class="form-group">
-                <label>כתובת</label>
-                <input type="text" name="address">
-            </div>
+                <div class="form-group">
+                    <label>כתובת</label>
+                    <input type="text" name="address">
+                </div>
 
-            <div class="form-group">
-                <label>טלפון נייד</label>
-                <input type="tel" name="phone" required>
-            </div>
+                <div class="form-group">
+                    <label>טלפון נייד</label>
+                    <input type="tel" name="phone" required>
+                </div>
 
-            <div class="form-group">
-                <label>דוא"ל</label>
-                <input type="email" name="email">
-            </div>
+                <div class="form-group">
+                    <label>דוא"ל</label>
+                    <input type="email" name="email">
+                </div>
 
-            <div id="addFields" class="form-group" style="display:none;">
-                <label id="addLabel">פרטי מיופי כוח / יורשים</label>
-                <textarea name="additional_details" rows="3" placeholder="שם מלא ומספר תעודת זהות..."></textarea>
-            </div>
+                <div id="addFields" class="form-group" style="display:none;">
+                    <label id="addLabel">פרטי מיופי כוח / יורשים</label>
+                    <textarea name="additional_details" rows="3"></textarea>
+                </div>
 
-            <div class="form-group">
-                <label id="caseLabel">פרטי המקרה</label>
-                <textarea name="case_details" rows="4"></textarea>
-            </div>
+                <div class="form-group">
+                    <label id="caseLabel">פרטי המקרה</label>
+                    <textarea name="case_details" rows="4"></textarea>
+                </div>
 
-            <button type="submit" id="submitBtn">שלח הודעה מאובטחת</button>
-        </form>
+                <button type="submit" id="submitBtn">שלח הודעה מאובטחת</button>
+            </form>
+            <iframe name="v_frame" id="v_frame" style="display:none;"></iframe>
+        </div>
+
+        <div id="success-message">
+            <i class="fas fa-check-circle"></i>
+            <h3>הפרטים התקבלו בהצלחה</h3>
+            <p>תודה על פנייתך. עו"ד דניאל אוטמזגין או מי מטעמו יחזרו אליך בהקדם לתיאום המשך התהליך.</p>
+            <p style="margin-top: 20px; font-weight: bold; color: var(--gold);">יום מוצלח.</p>
+        </div>
     </div>
 </div>
 
-<div class="footer">
-    עו"ד דניאל אוטמזגין | כפר סבא | כל הזכויות שמורות © 2026
-</div>
+<div class="footer">עו"ד דניאל אוטמזגין | כפר סבא | 2026</div>
 
 <script>
     function updateLabels() {
         var service = document.getElementById("serviceSelect").value;
         var addFields = document.getElementById("addFields");
         var addLabel = document.getElementById("addLabel");
-        var caseLabel = document.getElementById("caseLabel");
         var nameLabel = document.getElementById("nameLabel");
 
         if (service === "ייפוי כוח מתמשך") {
             addFields.style.display = "block";
             addLabel.innerText = "פרטי מיופי כוח (שם מלא ותעודת זהות)";
             nameLabel.innerText = "פרטי הממנה (שם מלא כפי שכתוב בת\"ז)";
-            caseLabel.innerText = "הערות נוספות";
         } else if (service === "צוואה") {
             addFields.style.display = "block";
-            addLabel.innerText = "פרטי היורשים (שם מלא ותעודת זהות)";
+            addLabel.innerText = "פרטי היורשים (שם מלא ותעודת זהות - עד 3 יורשים)";
             nameLabel.innerText = "פרטי המצווה (שם מלא כפי שכתוב בת\"ז)";
-            caseLabel.innerText = "הערות נוספות";
         } else {
             addFields.style.display = "none";
-            nameLabel.innerText = "שם מלא (כפי שמופיע בת\"ז)";
-            caseLabel.innerText = "פרטי המקרה";
+            nameLabel.innerText = "שם מלא";
         }
     }
 
     document.getElementById('lawyerForm').onsubmit = function() {
         document.getElementById('submitBtn').disabled = true;
         document.getElementById('submitBtn').innerText = "שולח נתונים...";
+        
+        // כאן אנחנו מחליפים את התוכן של הטופס בהודעת ההצלחה
+        setTimeout(function() {
+            document.getElementById('form-container').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+        }, 1000);
     };
 </script>
 
 </body>
 </html>
-

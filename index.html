@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>עו"ד דניאל אוטמזגין - משרד עורכי דין ונוטריון</title>
+    <title>עו"ד דניאל אוטמזגין - משרד עורכי דין </title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -21,10 +21,11 @@
             line-height: 1.6;
         }
 
+        /* הדר חדש - מפריד בין השם לתמונה */
         header {
             background-color: var(--dark-blue);
             color: white;
-            padding: 80px 20px;
+            padding: 40px 20px;
             text-align: center;
             border-bottom: 5px solid var(--gold);
         }
@@ -32,9 +33,9 @@
         header h1 { margin: 0; font-size: 3rem; font-weight: 700; }
         header p { margin: 10px 0 0; font-size: 1.3rem; font-weight: 300; }
 
-        .container { max-width: 850px; margin: -60px auto 50px; padding: 0 20px; }
+        .container { max-width: 850px; margin: 30px auto 50px; padding: 0 20px; }
 
-        /* כרטיס פרופיל */
+        /* כרטיס פרופיל מעודכן - ללא מיקום אבסולוטי */
         .profile-card {
             background: white;
             border-radius: 8px;
@@ -42,24 +43,29 @@
             padding: 40px;
             text-align: center;
             margin-bottom: 30px;
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
+        /* התמונה עכשיו נדחפת למטה ולא מסתירה */
         .profile-img {
             width: 160px;
             height: 160px;
             border-radius: 50%;
             border: 5px solid var(--gold);
-            object-fit: cover; /* חותך שוליים שחורים ומתמקד במרכז */
-            margin-top: -120px;
+            object-fit: cover;
+            /* הסרתי את ה-margin השלילי */
+            margin-bottom: 20px; 
             background-color: white;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .bio {
-            margin: 25px 0;
+            margin: 10px 0 25px;
             font-size: 1.15rem;
             color: var(--dark-blue);
+            max-width: 700px;
         }
 
         .social-links { margin-top: 20px; }
@@ -130,8 +136,12 @@
         }
 
         @media (max-width: 600px) {
-            header h1 { font-size: 2.2rem; }
+            header { padding: 30px 10px; }
+            header h1 { font-size: 2rem; }
+            header p { font-size: 1.1rem; }
             .profile-card { padding: 20px; }
+            .profile-img { width: 120px; height: 120px; }
+            .bio { font-size: 1rem; }
         }
     </style>
 </head>
@@ -223,7 +233,6 @@
         var caseLabel = document.getElementById("caseLabel");
         var nameLabel = document.getElementById("nameLabel");
 
-        // איפוס והתאמה לפי סוג שירות
         if (service === "ייפוי כוח מתמשך") {
             additionalFields.style.display = "block";
             additionalLabel.innerText = "פרטי מיופי כוח (שם מלא ותעודת זהות)";

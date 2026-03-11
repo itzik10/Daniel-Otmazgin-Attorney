@@ -9,7 +9,7 @@
     <style>
         :root {
             --dark-blue: #101e36;
-            --black-bg: #000000; /* מותאם לרקע הלוגו החדש */
+            --black-bg: #000000;
             --gold: #b89551;
             --light-bg: #f8f9fa;
         }
@@ -17,12 +17,11 @@
         body {
             font-family: 'Assistant', sans-serif;
             margin: 0; padding: 0;
-            background-color: #fff;
+            background-color: #f4f5f7;
             color: #333;
             line-height: 1.6;
         }
 
-        /* הדר מותאם ללוגו שחור-זהב */
         header {
             background-color: var(--black-bg);
             color: white;
@@ -32,18 +31,17 @@
         }
 
         .main-logo {
-            max-width: 350px; /* גודל מותאם ללוגו החדש */
+            max-width: 350px;
             width: 100%;
             height: auto;
         }
 
-        .container { max-width: 900px; margin: 30px auto 50px; padding: 0 20px; }
+        .container { max-width: 1100px; margin: 30px auto 50px; padding: 0 20px; }
 
-        /* כרטיס פרופיל */
         .profile-card {
             background: white;
             border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
             padding: 40px;
             text-align: center;
             margin-bottom: 30px;
@@ -60,13 +58,19 @@
             object-fit: cover;
             margin-bottom: 20px; 
             background-color: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h1.lawyer-name {
+            color: var(--dark-blue);
+            margin: 0 0 10px 0;
+            font-size: 1.8rem;
         }
 
         .bio {
-            margin: 10px 0 25px;
+            margin: 0 0 25px;
             font-size: 1.15rem;
-            color: var(--dark-blue);
+            color: #555;
             max-width: 700px;
         }
 
@@ -79,12 +83,17 @@
         }
         .social-links a:hover { color: var(--gold); transform: scale(1.1); }
 
-        /* לשוניות מידע */
-        .info-tabs {
+        .content-layout {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .info-tabs {
+            display: flex;
+            flex-direction: column;
             gap: 20px;
-            margin-bottom: 40px;
         }
 
         .info-tab {
@@ -92,7 +101,7 @@
             border-top: 4px solid var(--gold);
             padding: 25px;
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
 
         .info-tab h3 {
@@ -101,18 +110,18 @@
             border-bottom: 1px solid var(--gold);
             display: inline-block;
             padding-bottom: 5px;
+            font-size: 1.3rem;
         }
 
         .info-tab ul { padding: 0; list-style: none; margin-top: 15px; }
         .info-tab li { position: relative; padding-right: 20px; margin-bottom: 10px; font-size: 1.05rem; }
         .info-tab li::before { content: "•"; color: var(--gold); position: absolute; right: 0; font-weight: bold; }
 
-        /* כרטיס טופס */
         .form-card {
             background: white;
             padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
             border-top: 4px solid var(--gold);
             min-height: 400px;
             position: relative;
@@ -126,6 +135,12 @@
             width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 4px;
             box-sizing: border-box; font-family: inherit; font-size: 16px;
         }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 5px rgba(184, 149, 81, 0.3);
+        }
 
         button {
             width: 100%; background-color: var(--dark-blue); color: white;
@@ -134,6 +149,7 @@
         }
 
         button:hover { background-color: var(--gold); }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
 
         #success-message {
             display: none;
@@ -149,117 +165,131 @@
 
         .footer { text-align: center; padding: 40px; background-color: var(--light-bg); color: #666; margin-top: 50px; }
 
-        @media (max-width: 768px) {
-            .info-tabs { grid-template-columns: 1fr; }
+        @media (max-width: 900px) {
+            .content-layout { grid-template-columns: 1fr; } 
             .main-logo { max-width: 240px; }
+            .form-card { padding: 25px; }
+            .sidebar { order: 2; }
+            .form-section { order: 1; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <img src="log.png" alt="דניאל אוטמזגין משרד עורכי דין" class="main-logo">
+    <img src="log.png" alt="לוגו משרד עורכי דין דניאל אוטמזגין" class="main-logo">
 </header>
 
 <div class="container">
     <div class="profile-card">
-        <img src="Daniel.jpg" alt="עו"ד דניאל אוטמזגין" class="profile-img">
+        <img src="Daniel.jpg" alt="עו״ד דניאל אוטמזגין" class="profile-img">
+        <h1 class="lawyer-name">עו"ד דניאל אוטמזגין</h1>
         <div class="bio">
-            <strong>עו"ד דניאל אוטמזגין</strong>, בעל שלושה תארים במשפטים, ממשל ומדיניות ציבורית.<br>
+            בעל שלושה תארים במשפטים, ממשל ומדיניות ציבורית.<br>
             כיהן בשורת תפקידים בכירים במגזר הציבורי ובעל ניסיון מוניציפאלי רב. 
             מתמחה בדין האזרחי והפלילי ובעל הסמכה מיוחדת מטעם משרד המשפטים והאפוטרופוס הכללי לעריכת ייפוי כוח מתמשך.
         </div>
         <div class="social-links">
-            <a href="https://wa.me/message/UWW26AIWIPANB1" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.facebook.com/share/175QVheqhB/" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com/danielotmazgin" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://t.me/otmazginews" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a href="https://wa.me/message/UWW26AIWIPANB1" target="_blank" aria-label="וואטסאפ"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/share/175QVheqhB/" target="_blank" aria-label="פייסבוק"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/danielotmazgin" target="_blank" aria-label="אינסטגרם"><i class="fab fa-instagram"></i></a>
+            <a href="https://t.me/otmazginews" target="_blank" aria-label="טלגרם"><i class="fab fa-telegram"></i></a>
         </div>
     </div>
 
-    <div class="info-tabs">
-        <div class="info-tab">
-            <h3>ייפוי כוח מתמשך</h3>
-            <ul>
-                <li><strong>השליטה בידיים שלכם:</strong> אתם קובעים מי ינהל את ענייניכם בעתיד.</li>
-                <li><strong>מניעת אפוטרופסות:</strong> חוסך מהמשפחה הליכים משפטיים ומינוי זר.</li>
-                <li><strong>כבוד ורצון:</strong> הבטחה שסגנון החיים שלכם יישמר כפי שביקשתם.</li>
-            </ul>
-        </div>
-        <div class="info-tab">
-            <h3>צוואה וירושה</h3>
-            <ul>
-                <li><strong>מניעת סכסוכים:</strong> חלוקה ברורה שמונעת מחלוקות קשות בין יורשים.</li>
-                <li><strong>הגנה על היקרים:</strong> הבטחה שבן/בת הזוג והילדים ידאגו כלכלית.</li>
-                <li><strong>חלוקה אישית:</strong> הרכוש מחולק לפי רצונכם הבלעדי.</li>
-            </ul>
-        </div>
-    </div>
+    <div class="content-layout">
+        
+        <div class="form-section">
+            <div class="form-card">
+                <div id="form-content">
+                    <h2>תיאום פגישה ופנייה למשרד</h2>
+                    <form id="lawyerForm" action="https://script.google.com/macros/s/AKfycbyj9CJ9HVbJ85zmCOuQv1pTi3iAfgqhkhTHkiNYhr9VglCAEOk2Y7s9z3-abCwaxsgM/exec" method="POST">
+                        
+                        <input type="text" id="honeypot" style="display:none;" tabindex="-1" autocomplete="off">
 
-    <div class="form-card">
-        <div id="form-content">
-            <h2>תיאום פגישה ופנייה למשרד</h2>
-            <form id="lawyerForm" action="https://script.google.com/macros/s/AKfycbyj9CJ9HVbJ85zmCOuQv1pTi3iAfgqhkhTHkiNYhr9VglCAEOk2Y7s9z3-abCwaxsgM/exec" method="POST" target="hidden_iframe">
-                <div class="form-group">
-                    <label>סוג השירות המבוקש</label>
-                    <select name="service_type" id="serviceSelect" onchange="updateLabels()">
-                        <option value="ייעוץ כללי או משפטי">ייעוץ כללי או משפטי</option>
-                        <option value="ייפוי כוח מתמשך">ייפוי כוח מתמשך</option>
-                        <option value="צוואה">צוואה</option>
-                    </select>
+                        <div class="form-group">
+                            <label>סוג השירות המבוקש</label>
+                            <select name="service_type" id="serviceSelect" onchange="updateLabels()">
+                                <option value="ייעוץ כללי או משפטי">ייעוץ כללי או משפטי</option>
+                                <option value="ייפוי כוח מתמשך">ייפוי כוח מתמשך</option>
+                                <option value="צוואה">צוואה</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label id="nameLabel">שם מלא</label>
+                            <input type="text" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>מספר תעודת זהות</label>
+                            <input type="text" name="id_number" required pattern="\d{9}" title="אנא הזן תעודת זהות תקינה (9 ספרות)" inputmode="numeric">
+                        </div>
+                        <div class="form-group">
+                            <label>כתובת</label>
+                            <input type="text" name="address">
+                        </div>
+                        <div class="form-group">
+                            <label>טלפון נייד</label>
+                            <input type="tel" name="phone" required pattern="05\d{8}" title="אנא הזן מספר נייד תקין (לדוגמה: 0501234567)" inputmode="numeric">
+                        </div>
+                        <div class="form-group">
+                            <label>דוא"ל</label>
+                            <input type="email" name="email">
+                        </div>
+                        <div id="addFields" class="form-group" style="display:none;">
+                            <label id="addLabel">פרטי מיופי כוח / יורשים</label>
+                            <textarea name="additional_details" rows="3" placeholder="שמות מלאים ותעודות זהות..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label id="caseLabel">פרטי המקרה</label>
+                            <textarea name="case_details" rows="4"></textarea>
+                        </div>
+                        <button type="submit" id="submitBtn">שלח פנייה מאובטחת</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label id="nameLabel">שם מלא</label>
-                    <input type="text" name="name" required>
+
+                <div id="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>הפנייה נשלחה בהצלחה</h3>
+                    <p>תודה על פנייתך למשרדנו. עו"ד דניאל אוטמזגין או מי מטעמו יחזרו אליך בהקדם.</p>
+                    <p style="margin-top: 25px; font-weight: 700; color: var(--gold);">יום מוצלח.</p>
                 </div>
-                <div class="form-group">
-                    <label>מספר תעודת זהות</label>
-                    <input type="text" name="id_number" required>
-                </div>
-                <div class="form-group">
-                    <label>כתובת</label>
-                    <input type="text" name="address">
-                </div>
-                <div class="form-group">
-                    <label>טלפון נייד</label>
-                    <input type="tel" name="phone" required>
-                </div>
-                <div class="form-group">
-                    <label>דוא"ל</label>
-                    <input type="email" name="email">
-                </div>
-                <div id="addFields" class="form-group" style="display:none;">
-                    <label id="addLabel">פרטי מיופי כוח / יורשים</label>
-                    <textarea name="additional_details" rows="3" placeholder="שמות מלאים ותעודות זהות..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label id="caseLabel">פרטי המקרה</label>
-                    <textarea name="case_details" rows="4"></textarea>
-                </div>
-                <button type="submit" id="submitBtn">שלח פנייה מאובטחת</button>
-            </form>
-            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+            </div>
         </div>
 
-        <div id="success-message">
-            <i class="fas fa-check-circle"></i>
-            <h3>הפנייה נשלחה בהצלחה</h3>
-            <p>תודה על פנייתך למשרדנו. עו"ד דניאל אוטמזגין או מי מטעמו יחזרו אליך בהקדם.</p>
-            <p style="margin-top: 25px; font-weight: 700; color: var(--gold);">יום מוצלח.</p>
+        <div class="sidebar">
+            <div class="info-tabs">
+                <div class="info-tab">
+                    <h3>🛡️ ייפוי כוח מתמשך</h3>
+                    <ul>
+                        <li><strong>השליטה בידיים שלכם:</strong> אתם קובעים מי ינהל את ענייניכם בעתיד.</li>
+                        <li><strong>מניעת אפוטרופסות:</strong> חוסך מהמשפחה הליכים משפטיים ומינוי זר.</li>
+                        <li><strong>כבוד ורצון:</strong> הבטחה שסגנון החיים שלכם יישמר כפי שביקשתם.</li>
+                    </ul>
+                </div>
+                <div class="info-tab">
+                    <h3>📜 צוואה וירושה</h3>
+                    <ul>
+                        <li><strong>מניעת סכסוכים:</strong> חלוקה ברורה שמונעת מחלוקות קשות בין יורשים.</li>
+                        <li><strong>הגנה על היקרים:</strong> הבטחה שבן/בת הזוג והילדים ידאגו כלכלית.</li>
+                        <li><strong>חלוקה אישית:</strong> הרכוש מחולק לפי רצונכם הבלעדי.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
+
+    </div> 
 </div>
 
 <div class="footer">
-    עו"ד דניאל אוטמזגין | כפר סבא | 2026
+    עו"ד דניאל אוטמזגין | משרד עורכי דין | 2026
 </div>
 
 <script>
     function updateLabels() {
-        var service = document.getElementById("serviceSelect").value;
-        var addFields = document.getElementById("addFields");
-        var addLabel = document.getElementById("addLabel");
-        var nameLabel = document.getElementById("nameLabel");
+        const service = document.getElementById("serviceSelect").value;
+        const addFields = document.getElementById("addFields");
+        const addLabel = document.getElementById("addLabel");
+        const nameLabel = document.getElementById("nameLabel");
 
         if (service === "ייפוי כוח מתמשך") {
             addFields.style.display = "block";
@@ -267,7 +297,7 @@
             nameLabel.innerText = "פרטי הממנה (שם מלא כפי שכתוב בת\"ז)";
         } else if (service === "צוואה") {
             addFields.style.display = "block";
-            addLabel.innerText = "פרטי היורשים (שם מלא ותעודת זהות)"; // הוסר "עד 3 יורשים"
+            addLabel.innerText = "פרטי היורשים (שם מלא ותעודת זהות)";
             nameLabel.innerText = "פרטי המצווה (שם מלא כפי שכתוב בת\"ז)";
         } else {
             addFields.style.display = "none";
@@ -275,17 +305,43 @@
         }
     }
 
-    document.getElementById('lawyerForm').onsubmit = function() {
-        document.getElementById('submitBtn').disabled = true;
-        document.getElementById('submitBtn').innerText = "שולח נתונים...";
-        setTimeout(function() {
+    document.getElementById('lawyerForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const honeypot = document.getElementById('honeypot');
+        if (honeypot && honeypot.value !== "") {
+            return; 
+        }
+
+        const btn = document.getElementById('submitBtn');
+        const originalBtnText = btn.innerText;
+        btn.disabled = true;
+        btn.innerText = "שולח נתונים, אנא המתן...";
+
+        const formData = new FormData(this);
+
+        try {
+            await fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors' 
+            });
+
             document.getElementById('form-content').style.display = 'none';
             document.getElementById('success-message').style.display = 'block';
-            window.scrollTo({ top: document.querySelector('.form-card').offsetTop - 50, behavior: 'smooth' });
-        }, 1500);
-    };
+            
+            window.scrollTo({ 
+                top: document.querySelector('.form-card').offsetTop - 50, 
+                behavior: 'smooth' 
+            });
+
+        } catch (error) {
+            alert("חלה שגיאה בשליחת הפנייה. אנא נסה שוב או צור קשר בוואטסאפ.");
+            btn.disabled = false;
+            btn.innerText = originalBtnText;
+        }
+    });
 </script>
 
 </body>
 </html>
-

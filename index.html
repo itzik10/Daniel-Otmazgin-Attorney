@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --dark-blue: #101e36; /* הכחול העמוק חזר וקיבל נוכחות */
+            --dark-blue: #101e36; 
             --black-bg: #000000;
             --gold: #b89551;
             --light-bg: #f4f5f7;
@@ -93,9 +93,10 @@
             align-items: start;
         }
 
-        /* עיצוב משותף לכרטיסיות המידע */
+        /* עיצוב משותף לכרטיסיות המידע - כעת כולן כחולות */
         .info-card {
-            background: white;
+            background-color: var(--dark-blue);
+            color: white;
             border-top: 4px solid var(--gold);
             padding: 30px;
             border-radius: 8px;
@@ -105,19 +106,10 @@
             box-sizing: border-box;
         }
 
-        .info-card.blue-theme {
-            background-color: var(--dark-blue);
-            color: white;
-            border-top: 4px solid var(--gold);
-        }
-
-        .info-card.blue-theme h3 { color: var(--gold); border-bottom-color: rgba(255,255,255,0.2); }
-        .info-card.blue-theme .fields-text { color: #e0e0e0; }
-
         .info-card h3 {
-            color: var(--dark-blue);
+            color: var(--gold);
             margin-top: 0;
-            border-bottom: 1px solid var(--gold);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
             display: inline-block;
             padding-bottom: 8px;
             font-size: 1.4rem;
@@ -128,7 +120,7 @@
         .info-card li { position: relative; padding-right: 20px; margin-bottom: 15px; font-size: 1.05rem; }
         .info-card li::before { content: "•"; color: var(--gold); position: absolute; right: 0; font-weight: bold; font-size: 1.2rem; }
 
-        .fields-text { font-size: 1.1rem; line-height: 1.9; font-weight: 300; }
+        .fields-text { font-size: 1.1rem; line-height: 1.9; font-weight: 300; color: #e0e0e0; }
 
         /* קרוסלת המובייל (Swipe) */
         .sidebar-wrapper {
@@ -204,14 +196,14 @@
             .sidebar-wrapper::-webkit-scrollbar { display: none; }
             
             .info-card {
-                min-width: 85%; /* כל כרטיס תופס כמעט את כל המסך כדי לעודד החלקה */
+                min-width: 85%; 
                 scroll-snap-align: center;
                 margin-bottom: 0;
             }
             
             /* רמז חזותי לגולש שאפשר להחליק */
             .sidebar-wrapper::after {
-                content: '\f104'; /* חץ שמאלה של FontAwesome */
+                content: '\f104'; 
                 font-family: 'Font Awesome 6 Free';
                 font-weight: 900;
                 position: absolute;
@@ -230,7 +222,7 @@
 <body>
 
 <header>
-    <img src="log1.png" alt="דניאל אוטמזגין משרד עורכי דין" class="main-logo">
+    <img src="log.png" alt="דניאל אוטמזגין משרד עורכי דין" class="main-logo">
 </header>
 
 <div class="container">
@@ -312,6 +304,16 @@
         <div class="sidebar-wrapper" style="position: relative;">
             
             <div class="info-card">
+                <h3>🏛️ תחומי המשרד</h3>
+                <div class="fields-text">
+                    <strong>נדל״ן ומקרקעין</strong> • ביטוח לאומי • רשלנות רפואית<br><br>
+                    <strong>נזיקין</strong> • תאונות דרכים • תעבורה<br><br>
+                    <strong>צוואות וירושות</strong> • ייפוי כוח מתמשך<br><br>
+                    <strong>משפט מסחרי</strong> • משפט מינהלי
+                </div>
+            </div>
+
+            <div class="info-card">
                 <h3>🛡️ ייפוי כוח מתמשך</h3>
                 <ul>
                     <li>אתה קובע מראש מי יקבל החלטות בשמך וכיצד יתנהלו ענייניך האישיים, הרפואיים והרכושיים.</li>
@@ -328,16 +330,6 @@
                     <li>מניעת סכסוכים במשפחה - חלוקה ברורה שמונעת מחלוקות קשות.</li>
                     <li>מינוי אפוטרופוס - מאפשר לקבוע מי ידאג לילדיך לאחר לכתך.</li>
                 </ul>
-            </div>
-
-            <div class="info-card blue-theme">
-                <h3>🏛️ תחומי המשרד</h3>
-                <div class="fields-text">
-                    <strong>נדל״ן ומקרקעין</strong> • ביטוח לאומי • רשלנות רפואית<br><br>
-                    <strong>נזיקין</strong> • תאונות דרכים • תעבורה<br><br>
-                    <strong>צוואות וירושות</strong> • ייפוי כוח מתמשך<br><br>
-                    <strong>משפט מסחרי</strong> • משפט מינהלי
-                </div>
             </div>
 
         </div>
@@ -371,11 +363,10 @@
         }
     }
 
-    // פונקציית שליחה מאובטחת וחכמה (Fetch במקום iframe)
+    // פונקציית שליחה מאובטחת וחכמה
     document.getElementById('lawyerForm').addEventListener('submit', async function(event) {
-        event.preventDefault(); // עוצר את רענון הדף
+        event.preventDefault(); 
 
-        // בדיקת Honeypot נגד בוטים - אם השדה הנסתר מולא, זה כנראה ספאם
         const honeypot = document.getElementById('honeypot');
         if (honeypot && honeypot.value !== "") {
             return; 
@@ -389,14 +380,12 @@
         const formData = new FormData(this);
 
         try {
-            // שליחת הנתונים לאקסל
             await fetch(this.action, {
                 method: 'POST',
                 body: formData,
                 mode: 'no-cors' 
             });
 
-            // רק אם השליחה הצליחה - מסתירים את הטופס ומציגים וירוק
             document.getElementById('form-content').style.display = 'none';
             document.getElementById('success-message').style.display = 'block';
             
@@ -406,7 +395,6 @@
             });
 
         } catch (error) {
-            // במקרה של בעיית אינטרנט למשל
             alert("חלה שגיאה בשליחת הפנייה. אנא בדוק את חיבור האינטרנט שלך, נסה שוב או צור קשר בוואטסאפ.");
             btn.disabled = false;
             btn.innerText = originalBtnText;
@@ -416,4 +404,3 @@
 
 </body>
 </html>
-

@@ -39,9 +39,9 @@
 
         .container { max-width: 1100px; margin: 30px auto 50px; padding: 0 20px; }
 
-        /* כרטיס פרופיל */
+        /* כרטיס פרופיל - הכחול העמוק חזר, כולל לוגו נסתר */
         .profile-card {
-            background: white;
+            background-color: var(--dark-blue);
             border-radius: 8px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
             padding: 40px;
@@ -50,6 +50,42 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            color: white;
+            position: relative; /* למיקום הלוגו מאחורי התמונה */
+        }
+
+        /* הלוגו מאחורי התמונה, מוסתר חלקית */
+        .logo-background {
+            position: absolute;
+            top: 40px; /* מתאים ל-padding העליון */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            text-align: center;
+            z-index: 1; /* מתחת לתמונה ולשם */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .logo-hebrew {
+            font-size: 2rem;
+            color: #f0f0f0; /* אוף-ווייט ללוגו */
+            font-weight: 700;
+        }
+        .logo-icon {
+            height: 40px; /* מתאים את הגובה */
+            width: auto;
+        }
+        .logo-english {
+            font-size: 1.5rem;
+            color: rgba(240, 240, 240, 0.7); /* שקוף מעט */
+            font-weight: 400;
         }
 
         .profile-img {
@@ -61,27 +97,31 @@
             margin-bottom: 20px; 
             background-color: white;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 2; /* על הלוגו */
         }
 
         h1.lawyer-name {
-            color: var(--dark-blue);
+            color: white;
             margin: 0 0 10px 0;
             font-size: 2rem;
+            z-index: 2; /* מעל הלוגו */
         }
 
         .bio {
             margin: 0 0 25px;
             font-size: 1.15rem;
-            color: #444;
+            color: #e0e0e0; /* צבע בהיר יותר לביו על כחול */
             max-width: 700px;
+            z-index: 2; /* מעל הלוגו */
         }
 
         .social-links a {
             font-size: 28px;
             margin: 0 12px;
-            color: var(--dark-blue);
+            color: white;
             transition: 0.3s;
             text-decoration: none;
+            z-index: 2; /* מעל הלוגו */
         }
         .social-links a:hover { color: var(--gold); transform: scale(1.1); }
 
@@ -93,7 +133,7 @@
             align-items: start;
         }
 
-        /* עיצוב משותף לכרטיסיות המידע - כעת כולן כחולות */
+        /* עיצוב משותף לכרטיסיות המידע - כולן כחולות */
         .info-card {
             background-color: var(--dark-blue);
             color: white;
@@ -227,6 +267,14 @@
 
 <div class="container">
     <div class="profile-card">
+        <div class="logo-background">
+            <div class="logo-group">
+                <span class="logo-hebrew">דניאל אוטמזגין</span>
+                <img src="log1.png" alt="לוגו דניאל אוטמזגין" class="logo-icon">
+            </div>
+            <div class="logo-english">DANIEL OTMAZGIN</div>
+        </div>
+
         <img src="Daniel.jpg" alt="עו״ד דניאל אוטמזגין" class="profile-img">
         <h1 class="lawyer-name">עו"ד דניאל אוטמזגין</h1>
         <div class="bio">
@@ -327,7 +375,7 @@
                 <h3>📜 צוואות וירושות</h3>
                 <ul>
                     <li>אתה קובע למי וכיצד יחולק רכושך.</li>
-                    <li>מניעת סכסוכים במשפחה - חלוקה ברורה שמונעת מחלוקות קשות.</li>
+                    <li>Mניעת סכסוכים במשפחה - חלוקה ברורה שמונעת מחלוקות קשות.</li>
                     <li>מינוי אפוטרופוס - מאפשר לקבוע מי ידאג לילדיך לאחר לכתך.</li>
                 </ul>
             </div>
@@ -356,7 +404,7 @@
         } else if (service === "צוואה") {
             addFields.style.display = "block";
             addLabel.innerText = "פרטי היורשים (שם מלא ותעודת זהות)";
-            nameLabel.innerText = "פרטי המצווה (שם מלא כפי שכתוב בת\"ז)";
+            nameLabel.innerText = "פרטי המצווה (שם מלא)"; /* הוסר הכיתוב בסוגריים */
         } else {
             addFields.style.display = "none";
             nameLabel.innerText = "שם מלא";

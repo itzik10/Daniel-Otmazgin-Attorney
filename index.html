@@ -8,18 +8,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --dark-blue: #101e36;
+            --dark-blue: #101e36; /* הכחול העמוק חזר וקיבל נוכחות */
             --black-bg: #000000;
             --gold: #b89551;
-            --light-bg: #f8f9fa;
+            --light-bg: #f4f5f7;
         }
 
         body {
             font-family: 'Assistant', sans-serif;
             margin: 0; padding: 0;
-            background-color: #f4f5f7;
+            background-color: var(--light-bg);
             color: #333;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         header {
@@ -38,13 +39,14 @@
 
         .container { max-width: 1100px; margin: 30px auto 50px; padding: 0 20px; }
 
+        /* כרטיס פרופיל */
         .profile-card {
             background: white;
             border-radius: 8px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
             padding: 40px;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -64,13 +66,13 @@
         h1.lawyer-name {
             color: var(--dark-blue);
             margin: 0 0 10px 0;
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
 
         .bio {
             margin: 0 0 25px;
             font-size: 1.15rem;
-            color: #555;
+            color: #444;
             max-width: 700px;
         }
 
@@ -83,6 +85,7 @@
         }
         .social-links a:hover { color: var(--gold); transform: scale(1.1); }
 
+        /* פריסה לעמודות (מחשב) */
         .content-layout {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -90,94 +93,144 @@
             align-items: start;
         }
 
-        .info-tabs {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .info-tab {
+        /* עיצוב משותף לכרטיסיות המידע */
+        .info-card {
             background: white;
             border-top: 4px solid var(--gold);
-            padding: 25px;
+            padding: 30px;
             border-radius: 8px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            height: 100%;
+            box-sizing: border-box;
         }
 
-        .info-tab h3 {
+        .info-card.blue-theme {
+            background-color: var(--dark-blue);
+            color: white;
+            border-top: 4px solid var(--gold);
+        }
+
+        .info-card.blue-theme h3 { color: var(--gold); border-bottom-color: rgba(255,255,255,0.2); }
+        .info-card.blue-theme .fields-text { color: #e0e0e0; }
+
+        .info-card h3 {
             color: var(--dark-blue);
             margin-top: 0;
             border-bottom: 1px solid var(--gold);
             display: inline-block;
-            padding-bottom: 5px;
-            font-size: 1.3rem;
+            padding-bottom: 8px;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
         }
 
-        .info-tab ul { padding: 0; list-style: none; margin-top: 15px; }
-        .info-tab li { position: relative; padding-right: 20px; margin-bottom: 10px; font-size: 1.05rem; }
-        .info-tab li::before { content: "•"; color: var(--gold); position: absolute; right: 0; font-weight: bold; }
+        .info-card ul { padding: 0; list-style: none; margin: 0; }
+        .info-card li { position: relative; padding-right: 20px; margin-bottom: 15px; font-size: 1.05rem; }
+        .info-card li::before { content: "•"; color: var(--gold); position: absolute; right: 0; font-weight: bold; font-size: 1.2rem; }
 
+        .fields-text { font-size: 1.1rem; line-height: 1.9; font-weight: 300; }
+
+        /* קרוסלת המובייל (Swipe) */
+        .sidebar-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* כרטיס טופס */
         .form-card {
             background: white;
             padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             border-top: 4px solid var(--gold);
-            min-height: 400px;
             position: relative;
         }
 
-        .form-card h2 { text-align: center; color: var(--dark-blue); margin-bottom: 30px; }
+        .form-card h2 { text-align: center; color: var(--dark-blue); margin-bottom: 30px; font-size: 1.8rem; }
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-weight: 700; color: var(--dark-blue); }
         
         input, select, textarea {
             width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 4px;
-            box-sizing: border-box; font-family: inherit; font-size: 16px;
+            box-sizing: border-box; font-family: inherit; font-size: 16px; background-color: #fafafa;
         }
-        
         input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 5px rgba(184, 149, 81, 0.3);
+            outline: none; border-color: var(--gold); box-shadow: 0 0 5px rgba(184, 149, 81, 0.3); background-color: #fff;
         }
 
         button {
             width: 100%; background-color: var(--dark-blue); color: white;
             padding: 20px; border: none; border-radius: 4px;
-            font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: 0.3s;
+            font-size: 1.3rem; font-weight: 700; cursor: pointer; transition: 0.3s;
+            margin-top: 10px;
         }
 
         button:hover { background-color: var(--gold); }
-        button:disabled { background-color: #ccc; cursor: not-allowed; }
+        button:disabled { background-color: #777; cursor: not-allowed; }
 
         #success-message {
-            display: none;
-            text-align: center;
-            padding: 40px 10px;
-            animation: fadeIn 0.5s ease-in;
+            display: none; text-align: center; padding: 40px 10px; animation: fadeIn 0.5s ease-in;
         }
-
         #success-message i { font-size: 60px; color: var(--gold); margin-bottom: 20px; }
         #success-message h3 { color: var(--dark-blue); font-size: 2rem; margin-bottom: 15px; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .footer { text-align: center; padding: 40px; background-color: var(--light-bg); color: #666; margin-top: 50px; }
+        .footer { text-align: center; padding: 40px; background-color: var(--dark-blue); color: white; margin-top: 50px; font-weight: 300; }
 
+        /* =========================================
+           תצוגת מובייל "מעניינת" - קרוסלת החלקה
+           ========================================= */
         @media (max-width: 900px) {
-            .content-layout { grid-template-columns: 1fr; } 
-            .main-logo { max-width: 240px; }
+            .content-layout { grid-template-columns: 1fr; gap: 20px; } 
+            .main-logo { max-width: 250px; }
             .form-card { padding: 25px; }
-            .sidebar { order: 2; }
-            .form-section { order: 1; }
+            
+            /* שינוי הסדר - המידע למעלה, הטופס למטה */
+            .sidebar-wrapper { order: 1; }
+            .form-section { order: 2; }
+
+            /* הפיכת הלשוניות לקרוסלה אופקית מחליקה (Swipe) */
+            .sidebar-wrapper {
+                flex-direction: row;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 15px;
+                padding-bottom: 15px;
+                /* הסתרת פס הגלילה לעיצוב נקי */
+                -ms-overflow-style: none;  
+                scrollbar-width: none;  
+            }
+            .sidebar-wrapper::-webkit-scrollbar { display: none; }
+            
+            .info-card {
+                min-width: 85%; /* כל כרטיס תופס כמעט את כל המסך כדי לעודד החלקה */
+                scroll-snap-align: center;
+                margin-bottom: 0;
+            }
+            
+            /* רמז חזותי לגולש שאפשר להחליק */
+            .sidebar-wrapper::after {
+                content: '\f104'; /* חץ שמאלה של FontAwesome */
+                font-family: 'Font Awesome 6 Free';
+                font-weight: 900;
+                position: absolute;
+                left: 10px;
+                top: 50%;
+                color: var(--gold);
+                font-size: 24px;
+                opacity: 0.7;
+                animation: pulse 2s infinite;
+                pointer-events: none;
+            }
+            @keyframes pulse { 0% { transform: translateX(0); } 50% { transform: translateX(-10px); } 100% { transform: translateX(0); } }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <img src="log.png" alt="לוגו משרד עורכי דין דניאל אוטמזגין" class="main-logo">
+    <img src="log.png" alt="דניאל אוטמזגין משרד עורכי דין" class="main-logo">
 </header>
 
 <div class="container">
@@ -202,7 +255,7 @@
         <div class="form-section">
             <div class="form-card">
                 <div id="form-content">
-                    <h2>תיאום פגישה ופנייה למשרד</h2>
+                    <h2>פנייה מהירה למשרד</h2>
                     <form id="lawyerForm" action="https://script.google.com/macros/s/AKfycbyj9CJ9HVbJ85zmCOuQv1pTi3iAfgqhkhTHkiNYhr9VglCAEOk2Y7s9z3-abCwaxsgM/exec" method="POST">
                         
                         <input type="text" id="honeypot" style="display:none;" tabindex="-1" autocomplete="off">
@@ -221,15 +274,15 @@
                         </div>
                         <div class="form-group">
                             <label>מספר תעודת זהות</label>
-                            <input type="text" name="id_number" required pattern="\d{9}" title="אנא הזן תעודת זהות תקינה (9 ספרות)" inputmode="numeric">
+                            <input type="text" name="id_number" required pattern="\d{9}" title="חובה להזין 9 ספרות" inputmode="numeric" placeholder="9 ספרות כולל ספרת ביקורת">
                         </div>
                         <div class="form-group">
-                            <label>כתובת</label>
+                            <label>כתובת (עיר ורחוב)</label>
                             <input type="text" name="address">
                         </div>
                         <div class="form-group">
                             <label>טלפון נייד</label>
-                            <input type="tel" name="phone" required pattern="05\d{8}" title="אנא הזן מספר נייד תקין (לדוגמה: 0501234567)" inputmode="numeric">
+                            <input type="tel" name="phone" required pattern="05\d{8}" title="מספר נייד תקין לדוגמה 0501234567" inputmode="numeric" placeholder="לדוגמה: 0501234567">
                         </div>
                         <div class="form-group">
                             <label>דוא"ל</label>
@@ -240,7 +293,7 @@
                             <textarea name="additional_details" rows="3" placeholder="שמות מלאים ותעודות זהות..."></textarea>
                         </div>
                         <div class="form-group">
-                            <label id="caseLabel">פרטי המקרה</label>
+                            <label id="caseLabel">פרטי המקרה (בקצרה)</label>
                             <textarea name="case_details" rows="4"></textarea>
                         </div>
                         <button type="submit" id="submitBtn">שלח פנייה מאובטחת</button>
@@ -251,40 +304,53 @@
                     <i class="fas fa-check-circle"></i>
                     <h3>הפנייה נשלחה בהצלחה</h3>
                     <p>תודה על פנייתך למשרדנו. עו"ד דניאל אוטמזגין או מי מטעמו יחזרו אליך בהקדם.</p>
-                    <p style="margin-top: 25px; font-weight: 700; color: var(--gold);">יום מוצלח.</p>
+                    <p style="margin-top: 25px; font-weight: 700; color: var(--gold);">המשך יום מוצלח.</p>
                 </div>
             </div>
         </div>
 
-        <div class="sidebar">
-            <div class="info-tabs">
-                <div class="info-tab">
-                    <h3>🛡️ ייפוי כוח מתמשך</h3>
-                    <ul>
-                        <li><strong>השליטה בידיים שלכם:</strong> אתם קובעים מי ינהל את ענייניכם בעתיד.</li>
-                        <li><strong>מניעת אפוטרופסות:</strong> חוסך מהמשפחה הליכים משפטיים ומינוי זר.</li>
-                        <li><strong>כבוד ורצון:</strong> הבטחה שסגנון החיים שלכם יישמר כפי שביקשתם.</li>
-                    </ul>
-                </div>
-                <div class="info-tab">
-                    <h3>📜 צוואה וירושה</h3>
-                    <ul>
-                        <li><strong>מניעת סכסוכים:</strong> חלוקה ברורה שמונעת מחלוקות קשות בין יורשים.</li>
-                        <li><strong>הגנה על היקרים:</strong> הבטחה שבן/בת הזוג והילדים ידאגו כלכלית.</li>
-                        <li><strong>חלוקה אישית:</strong> הרכוש מחולק לפי רצונכם הבלעדי.</li>
-                    </ul>
+        <div class="sidebar-wrapper" style="position: relative;">
+            
+            <div class="info-card">
+                <h3>🛡️ ייפוי כוח מתמשך</h3>
+                <ul>
+                    <li>אתה קובע מראש מי יקבל החלטות בשמך וכיצד יתנהלו ענייניך האישיים, הרפואיים והרכושיים.</li>
+                    <li>חיסכון כספי ובירוקרטי – מייתר פנייה לבימ"ש ומינוי אפוטרופוס חיצוני.</li>
+                    <li>הגנה על רכושך - מבטיח ניהול כספים ע"י אדם שאתה סומך עליו.</li>
+                    <li>מסמך הבעת רצון - מי ידאג לילדיך במקרה של חוסר כשירות.</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>📜 צוואות וירושות</h3>
+                <ul>
+                    <li>אתה קובע למי וכיצד יחולק רכושך.</li>
+                    <li>מניעת סכסוכים במשפחה - חלוקה ברורה שמונעת מחלוקות קשות.</li>
+                    <li>מינוי אפוטרופוס - מאפשר לקבוע מי ידאג לילדיך לאחר לכתך.</li>
+                </ul>
+            </div>
+
+            <div class="info-card blue-theme">
+                <h3>🏛️ תחומי המשרד</h3>
+                <div class="fields-text">
+                    <strong>נדל״ן ומקרקעין</strong> • ביטוח לאומי • רשלנות רפואית<br><br>
+                    <strong>נזיקין</strong> • תאונות דרכים • תעבורה<br><br>
+                    <strong>צוואות וירושות</strong> • ייפוי כוח מתמשך<br><br>
+                    <strong>משפט מסחרי</strong> • משפט מינהלי
                 </div>
             </div>
+
         </div>
 
     </div> 
 </div>
 
 <div class="footer">
-    עו"ד דניאל אוטמזגין | משרד עורכי דין | 2026
+    עו"ד דניאל אוטמזגין | משרד עורכי דין | כפר סבא 2026
 </div>
 
 <script>
+    // פונקציה להתאמת השדות בהתאם לסוג השירות
     function updateLabels() {
         const service = document.getElementById("serviceSelect").value;
         const addFields = document.getElementById("addFields");
@@ -305,9 +371,11 @@
         }
     }
 
+    // פונקציית שליחה מאובטחת וחכמה (Fetch במקום iframe)
     document.getElementById('lawyerForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
+        event.preventDefault(); // עוצר את רענון הדף
 
+        // בדיקת Honeypot נגד בוטים - אם השדה הנסתר מולא, זה כנראה ספאם
         const honeypot = document.getElementById('honeypot');
         if (honeypot && honeypot.value !== "") {
             return; 
@@ -321,12 +389,14 @@
         const formData = new FormData(this);
 
         try {
+            // שליחת הנתונים לאקסל
             await fetch(this.action, {
                 method: 'POST',
                 body: formData,
                 mode: 'no-cors' 
             });
 
+            // רק אם השליחה הצליחה - מסתירים את הטופס ומציגים וירוק
             document.getElementById('form-content').style.display = 'none';
             document.getElementById('success-message').style.display = 'block';
             
@@ -336,7 +406,8 @@
             });
 
         } catch (error) {
-            alert("חלה שגיאה בשליחת הפנייה. אנא נסה שוב או צור קשר בוואטסאפ.");
+            // במקרה של בעיית אינטרנט למשל
+            alert("חלה שגיאה בשליחת הפנייה. אנא בדוק את חיבור האינטרנט שלך, נסה שוב או צור קשר בוואטסאפ.");
             btn.disabled = false;
             btn.innerText = originalBtnText;
         }

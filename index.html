@@ -9,7 +9,6 @@
     <style>
         :root {
             --dark-blue: #101e36; 
-            --black-bg: #000000;
             --gold: #b89551;
             --light-bg: #f4f5f7;
         }
@@ -23,109 +22,93 @@
             overflow-x: hidden;
         }
 
-        header {
-            background-color: var(--black-bg);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 5px solid var(--gold);
-        }
-
-        .main-logo {
-            max-width: 350px;
-            width: 100%;
-            height: auto;
-        }
-
-        .container { max-width: 1100px; margin: 30px auto 50px; padding: 0 20px; }
-
-        /* כרטיס פרופיל - הכחול העמוק חזר, כולל לוגו נסתר */
-        .profile-card {
+        /* =========================================
+           באנר עליון (כחול) - נשאר מקובע מאחור
+           ========================================= */
+        .top-banner {
             background-color: var(--dark-blue);
+            color: white;
+            padding: 50px 20px 130px; /* מרווח תחתון גדול כדי שהתמונה תוכל לעלות עליו */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            position: sticky; /* האפקט שמשאיר אותו מאחור בגלילה */
+            top: 0;
+            z-index: 1;
+        }
+
+        .banner-name {
+            font-size: 3.5rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .banner-logo {
+            height: 65px;
+            width: auto;
+        }
+
+        /* =========================================
+           תוכן מרכזי - מחליק מעל הבאנר הכחול בגלילה
+           ========================================= */
+        .main-content {
+            position: relative;
+            z-index: 2; /* מסתיר את הבאנר הכחול כשגוללים */
+            background-color: var(--light-bg);
+            padding-top: 1px;
+            margin-top: -30px; /* מעלה את כל הרקע האפור על הכחול */
+        }
+
+        .container { max-width: 1100px; margin: 0 auto 50px; padding: 0 20px; }
+
+        /* כרטיס פרופיל לבן */
+        .profile-card {
+            background: white;
             border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 0 40px 40px;
             text-align: center;
             margin-bottom: 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: white;
-            position: relative; /* למיקום הלוגו מאחורי התמונה */
-        }
-
-        /* הלוגו מאחורי התמונה, מוסתר חלקית */
-        .logo-background {
-            position: absolute;
-            top: 40px; /* מתאים ל-padding העליון */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            text-align: center;
-            z-index: 1; /* מתחת לתמונה ולשם */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .logo-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-        .logo-hebrew {
-            font-size: 2rem;
-            color: #f0f0f0; /* אוף-ווייט ללוגו */
-            font-weight: 700;
-        }
-        .logo-icon {
-            height: 40px; /* מתאים את הגובה */
-            width: auto;
-        }
-        .logo-english {
-            font-size: 1.5rem;
-            color: rgba(240, 240, 240, 0.7); /* שקוף מעט */
-            font-weight: 400;
+            margin-top: -80px; /* מושך את הכרטיס למעלה אל תוך הבאנר */
         }
 
         .profile-img {
-            width: 160px;
-            height: 160px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             border: 5px solid var(--gold);
             object-fit: cover;
-            margin-bottom: 20px; 
+            margin-top: -90px; /* מושך את התמונה למעלה כדי שתסתיר את הלוגו והשם */
+            margin-bottom: 25px; 
             background-color: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            z-index: 2; /* על הלוגו */
-        }
-
-        h1.lawyer-name {
-            color: white;
-            margin: 0 0 10px 0;
-            font-size: 2rem;
-            z-index: 2; /* מעל הלוגו */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 3;
         }
 
         .bio {
             margin: 0 0 25px;
             font-size: 1.15rem;
-            color: #e0e0e0; /* צבע בהיר יותר לביו על כחול */
+            color: #444;
             max-width: 700px;
-            z-index: 2; /* מעל הלוגו */
         }
 
         .social-links a {
             font-size: 28px;
             margin: 0 12px;
-            color: white;
+            color: var(--dark-blue);
             transition: 0.3s;
             text-decoration: none;
-            z-index: 2; /* מעל הלוגו */
         }
         .social-links a:hover { color: var(--gold); transform: scale(1.1); }
 
-        /* פריסה לעמודות (מחשב) */
+        /* =========================================
+           פריסה לעמודות (טופס + כרטיסיות כחולות)
+           ========================================= */
         .content-layout {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -133,14 +116,13 @@
             align-items: start;
         }
 
-        /* עיצוב משותף לכרטיסיות המידע - כולן כחולות */
         .info-card {
             background-color: var(--dark-blue);
             color: white;
             border-top: 4px solid var(--gold);
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             margin-bottom: 20px;
             height: 100%;
             box-sizing: border-box;
@@ -163,10 +145,7 @@
         .fields-text { font-size: 1.1rem; line-height: 1.9; font-weight: 300; color: #e0e0e0; }
 
         /* קרוסלת המובייל (Swipe) */
-        .sidebar-wrapper {
-            display: flex;
-            flex-direction: column;
-        }
+        .sidebar-wrapper { display: flex; flex-direction: column; }
 
         /* כרטיס טופס */
         .form-card {
@@ -200,9 +179,7 @@
         button:hover { background-color: var(--gold); }
         button:disabled { background-color: #777; cursor: not-allowed; }
 
-        #success-message {
-            display: none; text-align: center; padding: 40px 10px; animation: fadeIn 0.5s ease-in;
-        }
+        #success-message { display: none; text-align: center; padding: 40px 10px; animation: fadeIn 0.5s ease-in; }
         #success-message i { font-size: 60px; color: var(--gold); margin-bottom: 20px; }
         #success-message h3 { color: var(--dark-blue); font-size: 2rem; margin-bottom: 15px; }
 
@@ -211,25 +188,26 @@
         .footer { text-align: center; padding: 40px; background-color: var(--dark-blue); color: white; margin-top: 50px; font-weight: 300; }
 
         /* =========================================
-           תצוגת מובייל "מעניינת" - קרוסלת החלקה
+           תצוגת מובייל (סמארטפון)
            ========================================= */
         @media (max-width: 900px) {
+            .banner-name { font-size: 2.2rem; }
+            .banner-logo { height: 45px; }
+            .top-banner { padding: 40px 10px 110px; }
+            
             .content-layout { grid-template-columns: 1fr; gap: 20px; } 
-            .main-logo { max-width: 250px; }
             .form-card { padding: 25px; }
             
-            /* שינוי הסדר - המידע למעלה, הטופס למטה */
             .sidebar-wrapper { order: 1; }
             .form-section { order: 2; }
 
-            /* הפיכת הלשוניות לקרוסלה אופקית מחליקה (Swipe) */
+            /* קרוסלה */
             .sidebar-wrapper {
                 flex-direction: row;
                 overflow-x: auto;
                 scroll-snap-type: x mandatory;
                 gap: 15px;
                 padding-bottom: 15px;
-                /* הסתרת פס הגלילה לעיצוב נקי */
                 -ms-overflow-style: none;  
                 scrollbar-width: none;  
             }
@@ -241,7 +219,6 @@
                 margin-bottom: 0;
             }
             
-            /* רמז חזותי לגולש שאפשר להחליק */
             .sidebar-wrapper::after {
                 content: '\f104'; 
                 font-family: 'Font Awesome 6 Free';
@@ -261,128 +238,123 @@
 </head>
 <body>
 
-<header>
-    <img src="log.png" alt="דניאל אוטמזגין משרד עורכי דין" class="main-logo">
-</header>
+<div class="top-banner">
+    <img src="log1.png" alt="לוגו משרד עורכי דין" class="banner-logo">
+    <h1 class="banner-name">דניאל אוטמזגין</h1>
+</div>
 
-<div class="container">
-    <div class="profile-card">
-        <div class="logo-background">
-            <div class="logo-group">
-                <span class="logo-hebrew">דניאל אוטמזגין</span>
-                <img src="log1.png" alt="לוגו דניאל אוטמזגין" class="logo-icon">
-            </div>
-            <div class="logo-english">DANIEL OTMAZGIN</div>
-        </div>
-
-        <img src="Daniel.jpg" alt="עו״ד דניאל אוטמזגין" class="profile-img">
-        <h1 class="lawyer-name">עו"ד דניאל אוטמזגין</h1>
-        <div class="bio">
-            בעל שלושה תארים במשפטים, ממשל ומדיניות ציבורית.<br>
-            כיהן בשורת תפקידים בכירים במגזר הציבורי ובעל ניסיון מוניציפאלי רב. 
-            מתמחה בדין האזרחי והפלילי ובעל הסמכה מיוחדת מטעם משרד המשפטים והאפוטרופוס הכללי לעריכת ייפוי כוח מתמשך.
-        </div>
-        <div class="social-links">
-            <a href="https://wa.me/message/UWW26AIWIPANB1" target="_blank" aria-label="וואטסאפ"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.facebook.com/share/175QVheqhB/" target="_blank" aria-label="פייסבוק"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com/danielotmazgin" target="_blank" aria-label="אינסטגרם"><i class="fab fa-instagram"></i></a>
-            <a href="https://t.me/otmazginews" target="_blank" aria-label="טלגרם"><i class="fab fa-telegram"></i></a>
-        </div>
-    </div>
-
-    <div class="content-layout">
+<div class="main-content">
+    <div class="container">
         
-        <div class="form-section">
-            <div class="form-card">
-                <div id="form-content">
-                    <h2>פנייה מהירה למשרד</h2>
-                    <form id="lawyerForm" action="https://script.google.com/macros/s/AKfycbyj9CJ9HVbJ85zmCOuQv1pTi3iAfgqhkhTHkiNYhr9VglCAEOk2Y7s9z3-abCwaxsgM/exec" method="POST">
-                        
-                        <input type="text" id="honeypot" style="display:none;" tabindex="-1" autocomplete="off">
-
-                        <div class="form-group">
-                            <label>סוג השירות המבוקש</label>
-                            <select name="service_type" id="serviceSelect" onchange="updateLabels()">
-                                <option value="ייעוץ כללי או משפטי">ייעוץ כללי או משפטי</option>
-                                <option value="ייפוי כוח מתמשך">ייפוי כוח מתמשך</option>
-                                <option value="צוואה">צוואה</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label id="nameLabel">שם מלא</label>
-                            <input type="text" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label>מספר תעודת זהות</label>
-                            <input type="text" name="id_number" required pattern="\d{9}" title="חובה להזין 9 ספרות" inputmode="numeric" placeholder="9 ספרות כולל ספרת ביקורת">
-                        </div>
-                        <div class="form-group">
-                            <label>כתובת (עיר ורחוב)</label>
-                            <input type="text" name="address">
-                        </div>
-                        <div class="form-group">
-                            <label>טלפון נייד</label>
-                            <input type="tel" name="phone" required pattern="05\d{8}" title="מספר נייד תקין לדוגמה 0501234567" inputmode="numeric" placeholder="לדוגמה: 0501234567">
-                        </div>
-                        <div class="form-group">
-                            <label>דוא"ל</label>
-                            <input type="email" name="email">
-                        </div>
-                        <div id="addFields" class="form-group" style="display:none;">
-                            <label id="addLabel">פרטי מיופי כוח / יורשים</label>
-                            <textarea name="additional_details" rows="3" placeholder="שמות מלאים ותעודות זהות..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label id="caseLabel">פרטי המקרה (בקצרה)</label>
-                            <textarea name="case_details" rows="4"></textarea>
-                        </div>
-                        <button type="submit" id="submitBtn">שלח פנייה מאובטחת</button>
-                    </form>
-                </div>
-
-                <div id="success-message">
-                    <i class="fas fa-check-circle"></i>
-                    <h3>הפנייה נשלחה בהצלחה</h3>
-                    <p>תודה על פנייתך למשרדנו. עו"ד דניאל אוטמזגין או מי מטעמו יחזרו אליך בהקדם.</p>
-                    <p style="margin-top: 25px; font-weight: 700; color: var(--gold);">המשך יום מוצלח.</p>
-                </div>
+        <div class="profile-card">
+            <img src="Daniel.jpg" alt="עו״ד דניאל אוטמזגין" class="profile-img">
+            <div class="bio">
+                בעל שלושה תארים במשפטים, ממשל ומדיניות ציבורית.<br>
+                כיהן בשורת תפקידים בכירים במגזר הציבורי ובעל ניסיון מוניציפאלי רב. 
+                מתמחה בדין האזרחי והפלילי ובעל הסמכה מיוחדת מטעם משרד המשפטים והאפוטרופוס הכללי לעריכת ייפוי כוח מתמשך.
+            </div>
+            <div class="social-links">
+                <a href="https://wa.me/message/UWW26AIWIPANB1" target="_blank" aria-label="וואטסאפ"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.facebook.com/share/175QVheqhB/" target="_blank" aria-label="פייסבוק"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/danielotmazgin" target="_blank" aria-label="אינסטגרם"><i class="fab fa-instagram"></i></a>
+                <a href="https://t.me/otmazginews" target="_blank" aria-label="טלגרם"><i class="fab fa-telegram"></i></a>
             </div>
         </div>
 
-        <div class="sidebar-wrapper" style="position: relative;">
+        <div class="content-layout">
             
-            <div class="info-card">
-                <h3>🏛️ תחומי המשרד</h3>
-                <div class="fields-text">
-                    <strong>נדל״ן ומקרקעין</strong> • ביטוח לאומי • רשלנות רפואית<br><br>
-                    <strong>נזיקין</strong> • תאונות דרכים • תעבורה<br><br>
-                    <strong>צוואות וירושות</strong> • ייפוי כוח מתמשך<br><br>
-                    <strong>משפט מסחרי</strong> • משפט מינהלי
+            <div class="form-section">
+                <div class="form-card">
+                    <div id="form-content">
+                        <h2>פנייה מהירה למשרד</h2>
+                        <form id="lawyerForm" action="https://script.google.com/macros/s/AKfycbyj9CJ9HVbJ85zmCOuQv1pTi3iAfgqhkhTHkiNYhr9VglCAEOk2Y7s9z3-abCwaxsgM/exec" method="POST">
+                            
+                            <input type="text" id="honeypot" style="display:none;" tabindex="-1" autocomplete="off">
+
+                            <div class="form-group">
+                                <label>סוג השירות המבוקש</label>
+                                <select name="service_type" id="serviceSelect" onchange="updateLabels()">
+                                    <option value="ייעוץ כללי או משפטי">ייעוץ כללי או משפטי</option>
+                                    <option value="ייפוי כוח מתמשך">ייפוי כוח מתמשך</option>
+                                    <option value="צוואה">צוואה</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label id="nameLabel">שם מלא</label>
+                                <input type="text" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>מספר תעודת זהות</label>
+                                <input type="text" name="id_number" required pattern="\d{9}" title="חובה להזין 9 ספרות" inputmode="numeric" placeholder="9 ספרות כולל ספרת ביקורת">
+                            </div>
+                            <div class="form-group">
+                                <label>כתובת (עיר ורחוב)</label>
+                                <input type="text" name="address">
+                            </div>
+                            <div class="form-group">
+                                <label>טלפון נייד</label>
+                                <input type="tel" name="phone" required pattern="05\d{8}" title="מספר נייד תקין לדוגמה 0501234567" inputmode="numeric" placeholder="לדוגמה: 0501234567">
+                            </div>
+                            <div class="form-group">
+                                <label>דוא"ל</label>
+                                <input type="email" name="email">
+                            </div>
+                            <div id="addFields" class="form-group" style="display:none;">
+                                <label id="addLabel">פרטי מיופי כוח / יורשים</label>
+                                <textarea name="additional_details" rows="3" placeholder="שמות מלאים ותעודות זהות..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label id="caseLabel">פרטי המקרה (בקצרה)</label>
+                                <textarea name="case_details" rows="4"></textarea>
+                            </div>
+                            <button type="submit" id="submitBtn">שלח פנייה מאובטחת</button>
+                        </form>
+                    </div>
+
+                    <div id="success-message">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>הפנייה נשלחה בהצלחה</h3>
+                        <p>תודה על פנייתך למשרדנו. עו"ד דניאל אוטמזגין או מי מטעמו יחזרו אליך בהקדם.</p>
+                        <p style="margin-top: 25px; font-weight: 700; color: var(--gold);">המשך יום מוצלח.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="info-card">
-                <h3>🛡️ ייפוי כוח מתמשך</h3>
-                <ul>
-                    <li>אתה קובע מראש מי יקבל החלטות בשמך וכיצד יתנהלו ענייניך האישיים, הרפואיים והרכושיים.</li>
-                    <li>חיסכון כספי ובירוקרטי – מייתר פנייה לבימ"ש ומינוי אפוטרופוס חיצוני.</li>
-                    <li>הגנה על רכושך - מבטיח ניהול כספים ע"י אדם שאתה סומך עליו.</li>
-                    <li>מסמך הבעת רצון - מי ידאג לילדיך במקרה של חוסר כשירות.</li>
-                </ul>
+            <div class="sidebar-wrapper" style="position: relative;">
+                
+                <div class="info-card">
+                    <h3>🏛️ תחומי המשרד</h3>
+                    <div class="fields-text">
+                        <strong>נדל״ן ומקרקעין</strong> • ביטוח לאומי • רשלנות רפואית<br><br>
+                        <strong>נזיקין</strong> • תאונות דרכים • תעבורה<br><br>
+                        <strong>צוואות וירושות</strong> • ייפוי כוח מתמשך<br><br>
+                        <strong>משפט מסחרי</strong> • משפט מינהלי
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>🛡️ ייפוי כוח מתמשך</h3>
+                    <ul>
+                        <li>אתה קובע מראש מי יקבל החלטות בשמך וכיצד יתנהלו ענייניך האישיים, הרפואיים והרכושיים.</li>
+                        <li>חיסכון כספי ובירוקרטי – מייתר פנייה לבימ"ש ומינוי אפוטרופוס חיצוני.</li>
+                        <li>הגנה על רכושך - מבטיח ניהול כספים ע"י אדם שאתה סומך עליו.</li>
+                        <li>מסמך הבעת רצון - מי ידאג לילדיך במקרה של חוסר כשירות.</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3>📜 צוואות וירושות</h3>
+                    <ul>
+                        <li>אתה קובע למי וכיצד יחולק רכושך.</li>
+                        <li>מניעת סכסוכים במשפחה - חלוקה ברורה שמונעת מחלוקות קשות.</li>
+                        <li>מינוי אפוטרופוס - מאפשר לקבוע מי ידאג לילדיך לאחר לכתך.</li>
+                    </ul>
+                </div>
+
             </div>
 
-            <div class="info-card">
-                <h3>📜 צוואות וירושות</h3>
-                <ul>
-                    <li>אתה קובע למי וכיצד יחולק רכושך.</li>
-                    <li>Mניעת סכסוכים במשפחה - חלוקה ברורה שמונעת מחלוקות קשות.</li>
-                    <li>מינוי אפוטרופוס - מאפשר לקבוע מי ידאג לילדיך לאחר לכתך.</li>
-                </ul>
-            </div>
-
-        </div>
-
-    </div> 
+        </div> 
+    </div>
 </div>
 
 <div class="footer">
@@ -390,7 +362,6 @@
 </div>
 
 <script>
-    // פונקציה להתאמת השדות בהתאם לסוג השירות
     function updateLabels() {
         const service = document.getElementById("serviceSelect").value;
         const addFields = document.getElementById("addFields");
@@ -404,14 +375,13 @@
         } else if (service === "צוואה") {
             addFields.style.display = "block";
             addLabel.innerText = "פרטי היורשים (שם מלא ותעודת זהות)";
-            nameLabel.innerText = "פרטי המצווה (שם מלא)"; /* הוסר הכיתוב בסוגריים */
+            nameLabel.innerText = "פרטי המצווה (שם מלא)"; /* הסרנו את התוספת בסוגריים */
         } else {
             addFields.style.display = "none";
             nameLabel.innerText = "שם מלא";
         }
     }
 
-    // פונקציית שליחה מאובטחת וחכמה
     document.getElementById('lawyerForm').addEventListener('submit', async function(event) {
         event.preventDefault(); 
 

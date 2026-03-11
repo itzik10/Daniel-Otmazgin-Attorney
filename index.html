@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            /* שיניתי לכחול פחות כהה כדי שהלוגו יבלוט */
-            --dark-blue: #1a3b61;
+            --dark-blue: #101e36;
+            --black-bg: #000000; /* מותאם לרקע הלוגו החדש */
             --gold: #b89551;
             --light-bg: #f8f9fa;
         }
@@ -22,22 +22,22 @@
             line-height: 1.6;
         }
 
-        /* הדר עם הלוגו השקוף החדש */
+        /* הדר מותאם ללוגו שחור-זהב */
         header {
-            background-color: var(--dark-blue);
+            background-color: var(--black-bg);
             color: white;
-            padding: 30px 20px;
+            padding: 20px;
             text-align: center;
             border-bottom: 5px solid var(--gold);
         }
 
         .main-logo {
-            max-width: 450px;
+            max-width: 350px; /* גודל מותאם ללוגו החדש */
             width: 100%;
             height: auto;
         }
 
-        .container { max-width: 850px; margin: 30px auto 50px; padding: 0 20px; }
+        .container { max-width: 900px; margin: 30px auto 50px; padding: 0 20px; }
 
         /* כרטיס פרופיל */
         .profile-card {
@@ -79,6 +79,34 @@
         }
         .social-links a:hover { color: var(--gold); transform: scale(1.1); }
 
+        /* לשוניות מידע */
+        .info-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .info-tab {
+            background: white;
+            border-top: 4px solid var(--gold);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .info-tab h3 {
+            color: var(--dark-blue);
+            margin-top: 0;
+            border-bottom: 1px solid var(--gold);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .info-tab ul { padding: 0; list-style: none; margin-top: 15px; }
+        .info-tab li { position: relative; padding-right: 20px; margin-bottom: 10px; font-size: 1.05rem; }
+        .info-tab li::before { content: "•"; color: var(--gold); position: absolute; right: 0; font-weight: bold; }
+
         /* כרטיס טופס */
         .form-card {
             background: white;
@@ -91,7 +119,6 @@
         }
 
         .form-card h2 { text-align: center; color: var(--dark-blue); margin-bottom: 30px; }
-
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; font-weight: 700; color: var(--dark-blue); }
         
@@ -108,7 +135,6 @@
 
         button:hover { background-color: var(--gold); }
 
-        /* הודעת הצלחה מעוצבת */
         #success-message {
             display: none;
             text-align: center;
@@ -116,41 +142,23 @@
             animation: fadeIn 0.5s ease-in;
         }
 
-        #success-message i {
-            font-size: 60px;
-            color: var(--gold);
-            margin-bottom: 20px;
-        }
+        #success-message i { font-size: 60px; color: var(--gold); margin-bottom: 20px; }
+        #success-message h3 { color: var(--dark-blue); font-size: 2rem; margin-bottom: 15px; }
 
-        #success-message h3 {
-            color: var(--dark-blue);
-            font-size: 2rem;
-            margin-bottom: 15px;
-        }
-
-        #success-message p {
-            font-size: 1.2rem;
-            color: #555;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .footer { text-align: center; padding: 40px; background-color: var(--light-bg); color: #666; margin-top: 50px; }
 
-        @media (max-width: 600px) {
-            .main-logo { max-width: 280px; }
-            .profile-card { padding: 20px; }
-            .profile-img { width: 130px; height: 130px; }
+        @media (max-width: 768px) {
+            .info-tabs { grid-template-columns: 1fr; }
+            .main-logo { max-width: 240px; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <img src="log.png" alt="דניאל אוטמזגין משרד עורכי דין" class="main-logo">
+    <img src="log.jpg" alt="דניאל אוטמזגין משרד עורכי דין" class="main-logo">
 </header>
 
 <div class="container">
@@ -162,18 +170,36 @@
             מתמחה בדין האזרחי והפלילי ובעל הסמכה מיוחדת מטעם משרד המשפטים והאפוטרופוס הכללי לעריכת ייפוי כוח מתמשך.
         </div>
         <div class="social-links">
-            <a href="https://wa.me/message/UWW26AIWIPANB1" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.facebook.com/share/175QVheqhB/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com/danielotmazgin" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://t.me/otmazginews" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+            <a href="https://wa.me/message/UWW26AIWIPANB1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/share/175QVheqhB/" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/danielotmazgin" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://t.me/otmazginews" target="_blank"><i class="fab fa-telegram"></i></a>
+        </div>
+    </div>
+
+    <div class="info-tabs">
+        <div class="info-tab">
+            <h3>ייפוי כוח מתמשך</h3>
+            <ul>
+                <li><strong>השליטה בידיים שלכם:</strong> אתם קובעים מי ינהל את ענייניכם בעתיד.</li>
+                <li><strong>מניעת אפוטרופסות:</strong> חוסך מהמשפחה הליכים משפטיים ומינוי זר.</li>
+                <li><strong>כבוד ורצון:</strong> הבטחה שסגנון החיים שלכם יישמר כפי שביקשתם.</li>
+            </ul>
+        </div>
+        <div class="info-tab">
+            <h3>צוואה וירושה</h3>
+            <ul>
+                <li><strong>מניעת סכסוכים:</strong> חלוקה ברורה שמונעת מחלוקות קשות בין יורשים.</li>
+                <li><strong>הגנה על היקרים:</strong> הבטחה שבן/בת הזוג והילדים ידאגו כלכלית.</li>
+                <li><strong>חלוקה אישית:</strong> הרכוש מחולק לפי רצונכם הבלעדי.</li>
+            </ul>
         </div>
     </div>
 
     <div class="form-card">
         <div id="form-content">
-            <h2>פנייה למשרד</h2>
+            <h2>תיאום פגישה ופנייה למשרד</h2>
             <form id="lawyerForm" action="https://script.google.com/macros/s/AKfycbyj9CJ9HVbJ85zmCOuQv1pTi3iAfgqhkhTHkiNYhr9VglCAEOk2Y7s9z3-abCwaxsgM/exec" method="POST" target="hidden_iframe">
-                
                 <div class="form-group">
                     <label>סוג השירות המבוקש</label>
                     <select name="service_type" id="serviceSelect" onchange="updateLabels()">
@@ -182,42 +208,34 @@
                         <option value="צוואה">צוואה</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label id="nameLabel">שם מלא</label>
                     <input type="text" name="name" required>
                 </div>
-
                 <div class="form-group">
                     <label>מספר תעודת זהות</label>
                     <input type="text" name="id_number" required>
                 </div>
-
                 <div class="form-group">
                     <label>כתובת</label>
                     <input type="text" name="address">
                 </div>
-
                 <div class="form-group">
                     <label>טלפון נייד</label>
                     <input type="tel" name="phone" required>
                 </div>
-
                 <div class="form-group">
                     <label>דוא"ל</label>
                     <input type="email" name="email">
                 </div>
-
                 <div id="addFields" class="form-group" style="display:none;">
                     <label id="addLabel">פרטי מיופי כוח / יורשים</label>
-                    <textarea name="additional_details" rows="3" placeholder="הכנס שמות ותעודות זהות..."></textarea>
+                    <textarea name="additional_details" rows="3" placeholder="שמות מלאים ותעודות זהות..."></textarea>
                 </div>
-
                 <div class="form-group">
                     <label id="caseLabel">פרטי המקרה</label>
                     <textarea name="case_details" rows="4"></textarea>
                 </div>
-
                 <button type="submit" id="submitBtn">שלח פנייה מאובטחת</button>
             </form>
             <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
@@ -226,15 +244,14 @@
         <div id="success-message">
             <i class="fas fa-check-circle"></i>
             <h3>הפנייה נשלחה בהצלחה</h3>
-            <p>תודה על פנייתך למשרדנו.</p>
-            <p>עו"ד דניאל אוטמזגין או מי מטעמו יחזרו אליך בהקדם לתיאום המשך התהליך.</p>
+            <p>תודה על פנייתך למשרדנו. עו"ד דניאל אוטמזגין או מי מטעמו יחזרו אליך בהקדם.</p>
             <p style="margin-top: 25px; font-weight: 700; color: var(--gold);">יום מוצלח.</p>
         </div>
     </div>
 </div>
 
 <div class="footer">
-    עו"ד דניאל אוטמזגין | כפר סבא | כל הזכויות שמורות © 2026
+    עו"ד דניאל אוטמזגין | כפר סבא | 2026
 </div>
 
 <script>
@@ -242,40 +259,32 @@
         var service = document.getElementById("serviceSelect").value;
         var addFields = document.getElementById("addFields");
         var addLabel = document.getElementById("addLabel");
-        var caseLabel = document.getElementById("caseLabel");
         var nameLabel = document.getElementById("nameLabel");
 
         if (service === "ייפוי כוח מתמשך") {
             addFields.style.display = "block";
             addLabel.innerText = "פרטי מיופי כוח (שם מלא ותעודת זהות)";
             nameLabel.innerText = "פרטי הממנה (שם מלא כפי שכתוב בת\"ז)";
-            caseLabel.innerText = "הערות נוספות";
         } else if (service === "צוואה") {
             addFields.style.display = "block";
-            addLabel.innerText = "פרטי היורשים (שם מלא ותעודת זהות)";
+            addLabel.innerText = "פרטי היורשים (שם מלא ותעודת זהות)"; // הוסר "עד 3 יורשים"
             nameLabel.innerText = "פרטי המצווה (שם מלא כפי שכתוב בת\"ז)";
-            caseLabel.innerText = "הערות נוספות";
         } else {
             addFields.style.display = "none";
             nameLabel.innerText = "שם מלא";
-            caseLabel.innerText = "פרטי המקרה";
         }
     }
 
-    // טיפול בחוויית המשתמש לאחר הלחיצה
     document.getElementById('lawyerForm').onsubmit = function() {
         document.getElementById('submitBtn').disabled = true;
         document.getElementById('submitBtn').innerText = "שולח נתונים...";
-        
-        // השהייה קלה כדי לאפשר לנתונים להישלח, ואז הצגת הודעת ההצלחה המעוצבת
         setTimeout(function() {
             document.getElementById('form-content').style.display = 'none';
             document.getElementById('success-message').style.display = 'block';
-            window.scrollTo({ top: document.querySelector('.form-card').offsetTop - 20, behavior: 'smooth' });
+            window.scrollTo({ top: document.querySelector('.form-card').offsetTop - 50, behavior: 'smooth' });
         }, 1500);
     };
 </script>
 
 </body>
 </html>
-
